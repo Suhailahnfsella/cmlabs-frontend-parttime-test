@@ -37,3 +37,12 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+
+node_modules
+dist
+dist-ssr
+
+# Environment variables
+.env
+.env.*
+!.env.example
