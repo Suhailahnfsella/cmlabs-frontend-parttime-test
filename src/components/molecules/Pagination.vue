@@ -6,7 +6,7 @@ interface Props {
   currentPage: number
   totalPages: number
   totalItems: number
-  itemsPerPage: number
+  itemsPerPage: number | 'All'
 }
 
 const props = defineProps<Props>()
@@ -15,10 +15,10 @@ const emit = defineEmits<{
   'update:page': [page: number]
   'next': []
   'prev': []
-  'update:items-per-page': [value: number]
+  'update:items-per-page': [value: number | 'All']
 }>()
 
-const itemsPerPageOptions = [12, 24, 36, 48, 'All']
+const itemsPerPageOptions: (number | 'All')[] = [12, 24, 36, 48, 'All']
 
 const startItem = computed(() => {
   if (props.itemsPerPage === 'All') return 1
@@ -34,9 +34,9 @@ const getPageNumbers = () => {
   if (props.itemsPerPage === 'All') return [1]
 
   const delta = 2
-  const range = []
-  const rangeWithDots = []
-  let l
+  const range: number[] = []
+  const rangeWithDots: (number | string)[] = []
+  let l: number = 0
 
   for (let i = 1; i <= props.totalPages; i++) {
     if (i === 1 || i === props.totalPages || (i >= props.currentPage - delta && i <= props.currentPage + delta)) {
@@ -76,7 +76,7 @@ const isOpen = ref(false)
         <div class="relative">
           <button @click="isOpen = !isOpen" type="button"
             class="flex items-center justify-between px-4 py-2 bg-white border border-gray-200 rounded-xl hover:border-orange-300 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-all duration-200 cursor-pointer">
-            <span class="font-medium pr-2">{{ itemsPerPage }}</span>
+            <span class="font-medium pr-2">{{ props.itemsPerPage }}</span>
             <svg class="w-4 h-4 text-gray-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none"
               stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -88,7 +88,7 @@ const isOpen = ref(false)
             <div v-for="option in itemsPerPageOptions" :key="option"
               @click="emit('update:items-per-page', option); isOpen = false" :class="[
                 'px-4 py-2 cursor-pointer transition-colors',
-                itemsPerPage === option ? 'text-orange-600 font-semibold' : 'hover:bg-orange-50 hover:text-orange-600'
+                props.itemsPerPage === option ? 'text-orange-600 font-semibold' : 'hover:bg-orange-50 hover:text-orange-600'
               ]">
               {{ option }}
             </div>

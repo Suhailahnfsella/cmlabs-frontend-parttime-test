@@ -12,10 +12,10 @@ const meal = ref<MealDetail | null>(null)
 const ingredients = ref<any[]>([])
 const loading = ref(true)
 
-const getYoutubeEmbedUrl = (url: string | null) => {
-  if (!url) return null
+const getYoutubeEmbedUrl = (url: string | null): string | undefined => {
+  if (!url) return undefined
   const videoId = url.split('v=')[1]?.split('&')[0]
-  return videoId ? `https://www.youtube.com/embed/${videoId}` : null
+  return videoId ? `https://www.youtube.com/embed/${videoId}` : undefined
 }
 
 onMounted(async () => {
@@ -109,7 +109,7 @@ onMounted(async () => {
           </div>
         </div>
 
-        <div v-if="getYoutubeEmbedUrl(meal.strYoutube)" class="mb-8">
+        <div v-if="meal.strYoutube" class="mb-8">
           <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
             <svg class="w-6 h-6 text-red-600" fill="currentColor" viewBox="0 0 24 24">
               <path

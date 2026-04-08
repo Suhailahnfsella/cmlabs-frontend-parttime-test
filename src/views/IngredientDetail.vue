@@ -9,7 +9,7 @@ const props = defineProps<{ name: string }>()
 const meals = ref<Meal[]>([])
 const loading = ref(true)
 const currentPage = ref(1)
-const itemsPerPage = ref<number | string>(12)
+const itemsPerPage = ref<number | 'All'>(12)
 const searchQuery = ref('')
 
 const filteredMeals = computed(() => {
@@ -64,7 +64,7 @@ const prevPage = () => {
   }
 }
 
-const changeItemsPerPage = (newItemsPerPage: number | string) => {
+const changeItemsPerPage = (newItemsPerPage: number | 'All') => {
   itemsPerPage.value = newItemsPerPage
   currentPage.value = 1
 }
@@ -88,7 +88,7 @@ onMounted(async () => {
       <MealGrid :meals="paginatedMeals" :loading="loading" :total-items="totalItems" :ingredient-name="name" />
 
       <Pagination v-if="!loading && totalItems > 0" :current-page="currentPage" :total-pages="totalPages"
-        :total-items="totalItems" :items-per-page="itemsPerPage" @update:page="goToPage" @next="nextPage"
+        :total-items="totalItems" :items-per-page="Number(itemsPerPage)" @update:page="goToPage" @next="nextPage"
         @prev="prevPage" @update:items-per-page="changeItemsPerPage" />
     </div>
   </div>

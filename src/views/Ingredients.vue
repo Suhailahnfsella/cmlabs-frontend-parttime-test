@@ -66,7 +66,7 @@ onMounted(async () => {
       <IngredientGrid :ingredients="paginatedIngredients" :loading="loading" :total-items="totalItems" />
 
       <Pagination v-if="!loading && totalItems > 0" :current-page="currentPage" :total-pages="totalPages"
-        :total-items="totalItems" :items-per-page="itemsPerPage" @update:page="goToPage" @next="nextPage"
+        :total-items="totalItems" :items-per-page="Number(itemsPerPage)" @update:page="goToPage" @next="nextPage"
         @prev="prevPage" @update:items-per-page="changeItemsPerPage" />
     </div>
   </div>

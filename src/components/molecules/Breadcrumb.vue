@@ -43,13 +43,13 @@ const breadcrumbs = computed<BreadcrumbItem[]>(() => {
         })
     }
     else if (ingredientName) {
-        crumbs[crumbs.length - 1].isCurrent = true
+        crumbs[crumbs.length - 1]!.isCurrent = true
     }
     else if (route.path === '/' || route.path === '/ingredients') {
-        crumbs[crumbs.length - 1].isCurrent = true
+        crumbs[crumbs.length - 1]!.isCurrent = true
     }
     else if (route.path === '/home') {
-        crumbs[0].isCurrent = true
+        crumbs[crumbs.length - 1]!.isCurrent = true
     }
 
     return crumbs
