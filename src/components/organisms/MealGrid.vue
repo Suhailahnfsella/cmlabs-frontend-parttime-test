@@ -39,7 +39,6 @@ const handleClear = () => {
             <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
                 <span class="text-gradient">{{ ingredientName || 'Meals' }}</span>
             </h1>
-
             <p class="text-gray-500">
                 {{ ingredientName ? `Discover delicious recipes with ${ingredientName}` : 'Explore our collection of delicious meals' }}
             </p>
