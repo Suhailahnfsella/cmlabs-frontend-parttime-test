@@ -1,4 +1,4 @@
-# 🍽️ MEALAPP
+# 🍽️ MealApp
 
 ## 👩‍💻 Author
 
